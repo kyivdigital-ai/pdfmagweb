@@ -3,59 +3,78 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Holographic Card</title>
+  <title>Holographic Cards</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --x: 50%;
-      --y: 50%;
-      --tilt-x: 0deg;
-      --tilt-y: 0deg;
-      --card-ratio: 0.68;
+    * {
+      box-sizing: border-box;
     }
 
-    * { box-sizing: border-box; }
-
-    html, body {
+    html,
+    body {
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       margin: 0;
       background: transparent;
-      overflow: hidden;
     }
 
-    body { font-family: "Afacad", Arial, sans-serif; }
+    body {
+      font-family: "Afacad", Arial, sans-serif;
+      overflow-x: hidden;
+    }
 
-    .stage {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      padding: 48px 32px 64px;
       background: transparent;
-      overflow: visible;
-      perspective: 1200px;
-      touch-action: pan-y;
-      user-select: none;
     }
 
-    .float {
-      width: min(38vw, 340px);
-      aspect-ratio: var(--card-ratio) / 1;
-      animation: float 6.5s ease-in-out infinite;
+    .cards {
+      --gap: 24px;
+
+      width: min(100%, 1280px);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: var(--gap);
+    }
+
+    .card-shell {
+      --delay: 0s;
+
+      position: relative;
+      flex: 0 0 calc((100% - var(--gap) - var(--gap) - var(--gap)) / 4);
+      max-width: 290px;
+      aspect-ratio: 0.68 / 1;
+      perspective: 1200px;
       transform-style: preserve-3d;
+      animation: floatCard 6.5s ease-in-out infinite;
+      animation-delay: var(--delay);
       will-change: transform;
     }
 
     .card {
+      --x: 50%;
+      --y: 50%;
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+
       position: relative;
       width: 100%;
       height: 100%;
       overflow: hidden;
       border-radius: 0;
+      cursor: default;
+      touch-action: pan-y;
+      user-select: none;
+
       transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
       transform-origin: center;
       transform-style: preserve-3d;
@@ -77,6 +96,7 @@
 
       background-size: 260% 260%;
       animation: gradientMove 8s ease-in-out infinite;
+      animation-delay: var(--delay);
     }
 
     .rainbow {
@@ -98,6 +118,7 @@
       filter: blur(20px);
       opacity: .95;
       animation: rainbowMove 8s ease-in-out infinite;
+      animation-delay: var(--delay);
       pointer-events: none;
     }
 
@@ -147,7 +168,7 @@
       margin: 0;
       padding: 0;
       font-family: "Afacad", Arial, sans-serif;
-      font-size: clamp(96px, 12vw, 210px);
+      font-size: clamp(72px, 8vw, 168px);
       font-weight: 600;
       line-height: .78;
       color: #050505;
@@ -156,10 +177,10 @@
       white-space: nowrap;
     }
 
-    @keyframes float {
-      0%   { transform: translateY(3px) rotateZ(-.28deg); }
-      50%  { transform: translateY(-6px) rotateZ(.28deg); }
-      100% { transform: translateY(3px) rotateZ(-.28deg); }
+    @keyframes floatCard {
+      0%   { transform: translateY(3px) rotateZ(-.25deg); }
+      50%  { transform: translateY(-6px) rotateZ(.25deg); }
+      100% { transform: translateY(3px) rotateZ(-.25deg); }
     }
 
     @keyframes gradientMove {
@@ -174,77 +195,116 @@
       100% { transform: translate(-4%, -3%) rotate(-5deg); }
     }
 
-    @media (max-width: 700px) {
-      .float { width: min(58vw, 300px); }
-      .question { font-size: clamp(88px, 19vw, 165px); }
+    @media (max-width: 1000px) {
+      .cards {
+        --gap: 20px;
+        max-width: 900px;
+      }
+
+      .card-shell {
+        flex-basis: calc((100% - var(--gap) - var(--gap)) / 3);
+        max-width: 270px;
+      }
+
+      .question {
+        font-size: clamp(76px, 12vw, 150px);
+      }
     }
 
-    @media (max-height: 520px) {
-      .float { height: 76vh; width: auto; }
+    @media (max-width: 700px) {
+      .page {
+        padding: 18px 12px 36px;
+      }
+
+      .cards {
+        --gap: 10px;
+        width: 100%;
+      }
+
+      .card-shell {
+        flex: 0 0 calc((100% - var(--gap)) / 2);
+        max-width: none;
+      }
+
+      .question {
+        font-size: clamp(72px, 24vw, 132px);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .float, .card, .rainbow { animation: none; }
-      .card { transition: none; }
+      .card-shell,
+      .card,
+      .rainbow {
+        animation: none;
+      }
+
+      .card {
+        transition: none;
+      }
     }
   </style>
 </head>
 
 <body>
-  <main class="stage" id="stage">
-    <div class="float">
-      <div class="card" id="card">
-        <div class="rainbow"></div>
-        <div class="foil-lines"></div>
-        <div class="grain"></div>
-        <div class="glare"></div>
-        <div class="question">?</div>
-      </div>
-    </div>
+  <main class="page">
+    <section class="cards" aria-label="Holographic cards">
+      <div class="card-shell" style="--delay: -0.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -0.6s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -1.2s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -1.8s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -2.4s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -3.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -3.6s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -4.2s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -4.8s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -5.4s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay: -6.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+    </section>
   </main>
 
   <script>
-    const stage = document.getElementById("stage");
-    const card = document.getElementById("card");
+    const cards = document.querySelectorAll(".card");
 
-    function updatePointer(clientX, clientY) {
+    function updateCard(card, clientX, clientY) {
       const rect = card.getBoundingClientRect();
-
       const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
       const y = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
 
       card.style.setProperty("--x", `${x * 100}%`);
       card.style.setProperty("--y", `${y * 100}%`);
-
-      const tiltY = (x - 0.5) * 8;
-      const tiltX = (0.5 - y) * 6;
-
-      card.style.setProperty("--tilt-x", `${tiltX}deg`);
-      card.style.setProperty("--tilt-y", `${tiltY}deg`);
+      card.style.setProperty("--tilt-x", `${(0.5 - y) * 6}deg`);
+      card.style.setProperty("--tilt-y", `${(x - 0.5) * 8}deg`);
     }
 
-    function reset() {
+    function resetCard(card) {
       card.style.setProperty("--x", "50%");
       card.style.setProperty("--y", "50%");
       card.style.setProperty("--tilt-x", "0deg");
       card.style.setProperty("--tilt-y", "0deg");
     }
 
-    stage.addEventListener("pointermove", (e) => {
-      updatePointer(e.clientX, e.clientY);
-    });
+    cards.forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        updateCard(card, event.clientX, event.clientY);
+      });
 
-    stage.addEventListener("pointerdown", (e) => {
-      updatePointer(e.clientX, e.clientY);
-    });
+      card.addEventListener("pointerdown", (event) => {
+        updateCard(card, event.clientX, event.clientY);
+      });
 
-    stage.addEventListener("pointerleave", reset);
-    stage.addEventListener("pointercancel", reset);
+      card.addEventListener("pointerleave", () => resetCard(card));
+      card.addEventListener("pointercancel", () => resetCard(card));
 
-    stage.addEventListener("pointerup", (e) => {
-      if (e.pointerType === "touch") {
-        setTimeout(reset, 250);
-      }
+      card.addEventListener("pointerup", (event) => {
+        if (event.pointerType === "touch") {
+          setTimeout(() => resetCard(card), 250);
+        }
+      });
+
+      card.addEventListener("touchmove", (event) => {
+        if (!event.touches[0]) return;
+        updateCard(card, event.touches[0].clientX, event.touches[0].clientY);
+      }, { passive: true });
     });
   </script>
 </body>
