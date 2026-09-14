@@ -30,12 +30,12 @@
     .page {
       width: 100%;
       min-height: 100vh;
-      padding: 48px 32px 64px;
+      padding: 32px 24px 48px;
       background: transparent;
     }
 
     .cards {
-      --gap: 24px;
+      --gap: 18px;
 
       width: min(100%, 1280px);
       margin: 0 auto;
@@ -50,8 +50,8 @@
       --delay: 0s;
 
       position: relative;
-      flex: 0 0 calc((100% - var(--gap) - var(--gap) - var(--gap)) / 4);
-      max-width: 290px;
+      flex: 0 0 calc((100% - var(--gap) - var(--gap) - var(--gap) - var(--gap) - var(--gap)) / 6);
+      max-width: 190px;
       aspect-ratio: 0.68 / 1;
       perspective: 1200px;
       transform-style: preserve-3d;
@@ -168,7 +168,7 @@
       margin: 0;
       padding: 0;
       font-family: "Afacad", Arial, sans-serif;
-      font-size: clamp(72px, 8vw, 168px);
+      font-size: clamp(58px, 6vw, 110px);
       font-weight: 600;
       line-height: .78;
       color: #050505;
@@ -197,17 +197,17 @@
 
     @media (max-width: 1000px) {
       .cards {
-        --gap: 20px;
+        --gap: 16px;
         max-width: 900px;
       }
 
       .card-shell {
-        flex-basis: calc((100% - var(--gap) - var(--gap)) / 3);
-        max-width: 270px;
+        flex-basis: calc((100% - var(--gap) - var(--gap) - var(--gap)) / 4);
+        max-width: 190px;
       }
 
       .question {
-        font-size: clamp(76px, 12vw, 150px);
+        font-size: clamp(62px, 10vw, 105px);
       }
     }
 
