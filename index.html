@@ -200,32 +200,6 @@
       pointer-events: none;
     }
 
-    .product-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.56) 0%, rgba(0,0,0,.12) 34%, rgba(0,0,0,0) 58%);
-      pointer-events: none;
-    }
-
-    .product-title {
-      position: absolute;
-      left: 50%;
-      bottom: 12px;
-      z-index: 2;
-      width: calc(100% - 18px);
-      transform: translateX(-50%);
-      font-family: "Afacad", Arial, sans-serif;
-      font-size: clamp(18px, 1.9vw, 30px);
-      font-weight: 600;
-      line-height: .88;
-      letter-spacing: 0;
-      color: #fff;
-      text-align: center;
-      text-transform: uppercase;
-      pointer-events: none;
-    }
-
     @keyframes floatCard {
       0%   { transform: translateY(3px) rotateZ(-.25deg); }
       50%  { transform: translateY(-6px) rotateZ(.25deg); }
@@ -262,11 +236,6 @@
       .question {
         font-size: clamp(64px, 22vw, 126px);
       }
-
-      .product-title {
-        bottom: 10px;
-        font-size: clamp(20px, 8vw, 34px);
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -283,8 +252,7 @@
     <section class="cards" aria-label="Holographic cards">
       <div class="card-shell" style="--delay:-0.0s">
         <a class="card product-card" href="https://pdf-mag.com/traceyafrica/" target="_top" aria-label="TRACEY AFRICA">
-          <img src="tracey-africa.jpg" alt="TRACEY AFRICA" />
-          <div class="product-title">TRACEY AFRICA</div>
+          <img src="traceyafrica1.jpg" alt="TRACEY AFRICA" />
         </a>
       </div>
 
