@@ -10,9 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html,
     body {
@@ -20,24 +18,33 @@
       min-height: 100%;
       margin: 0;
       background: transparent;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
     }
 
     body {
       font-family: "Afacad", Arial, sans-serif;
       overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .page {
       width: 100%;
       min-height: 100vh;
-      padding: 32px 24px 48px;
+      padding: 28px 28px 36px;
       background: transparent;
     }
 
     .cards {
-      --gap: 18px;
-
-      width: min(100%, 1280px);
+      --gap: 16px;
+      width: min(100%, 1380px);
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
@@ -48,10 +55,9 @@
 
     .card-shell {
       --delay: 0s;
-
       position: relative;
-      flex: 0 0 calc((100% - var(--gap) - var(--gap) - var(--gap) - var(--gap) - var(--gap)) / 6);
-      max-width: 190px;
+      flex: 0 0 calc((100% - (var(--gap) * 5)) / 6);
+      max-width: 205px;
       aspect-ratio: 0.68 / 1;
       perspective: 1200px;
       transform-style: preserve-3d;
@@ -74,7 +80,6 @@
       cursor: default;
       touch-action: pan-y;
       user-select: none;
-
       transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
       transform-origin: center;
       transform-style: preserve-3d;
@@ -93,7 +98,6 @@
         #ced8ff 89%,
         #ead8ff 100%
       );
-
       background-size: 260% 260%;
       animation: gradientMove 8s ease-in-out infinite;
       animation-delay: var(--delay);
@@ -104,15 +108,15 @@
       inset: -35%;
       background: conic-gradient(
         from 150deg at var(--x) var(--y),
-        rgba(255, 80, 220, .20),
-        rgba(120, 100, 255, .30),
-        rgba(75, 225, 255, .28),
-        rgba(80, 255, 205, .24),
-        rgba(225, 255, 100, .20),
-        rgba(255, 205, 85, .26),
-        rgba(255, 100, 185, .24),
-        rgba(135, 100, 255, .28),
-        rgba(255, 80, 220, .20)
+        rgba(255,80,220,.20),
+        rgba(120,100,255,.30),
+        rgba(75,225,255,.28),
+        rgba(80,255,205,.24),
+        rgba(225,255,100,.20),
+        rgba(255,205,85,.26),
+        rgba(255,100,185,.24),
+        rgba(135,100,255,.28),
+        rgba(255,80,220,.20)
       );
       mix-blend-mode: color-dodge;
       filter: blur(20px);
@@ -168,7 +172,7 @@
       margin: 0;
       padding: 0;
       font-family: "Afacad", Arial, sans-serif;
-      font-size: clamp(58px, 6vw, 110px);
+      font-size: clamp(58px, 5.4vw, 115px);
       font-weight: 600;
       line-height: .78;
       color: #050505;
@@ -195,25 +199,9 @@
       100% { transform: translate(-4%, -3%) rotate(-5deg); }
     }
 
-    @media (max-width: 1000px) {
-      .cards {
-        --gap: 16px;
-        max-width: 900px;
-      }
-
-      .card-shell {
-        flex-basis: calc((100% - var(--gap) - var(--gap) - var(--gap)) / 4);
-        max-width: 190px;
-      }
-
-      .question {
-        font-size: clamp(62px, 10vw, 105px);
-      }
-    }
-
     @media (max-width: 700px) {
       .page {
-        padding: 18px 12px 36px;
+        padding: 14px 10px 28px;
       }
 
       .cards {
@@ -227,20 +215,15 @@
       }
 
       .question {
-        font-size: clamp(72px, 24vw, 132px);
+        font-size: clamp(64px, 22vw, 126px);
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .card-shell,
       .card,
-      .rainbow {
-        animation: none;
-      }
-
-      .card {
-        transition: none;
-      }
+      .rainbow { animation: none; }
+      .card { transition: none; }
     }
   </style>
 </head>
@@ -248,63 +231,58 @@
 <body>
   <main class="page">
     <section class="cards" aria-label="Holographic cards">
-      <div class="card-shell" style="--delay: -0.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -0.6s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -1.2s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -1.8s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -2.4s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -3.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -3.6s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -4.2s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -4.8s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -5.4s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
-      <div class="card-shell" style="--delay: -6.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-0.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-0.6s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-1.2s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-1.8s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-2.4s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-3.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-3.6s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-4.2s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-4.8s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-5.4s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
+      <div class="card-shell" style="--delay:-6.0s"><div class="card"><div class="rainbow"></div><div class="foil-lines"></div><div class="grain"></div><div class="glare"></div><div class="question">?</div></div></div>
     </section>
   </main>
 
   <script>
-    const cards = document.querySelectorAll(".card");
+    const cards = document.querySelectorAll('.card');
 
     function updateCard(card, clientX, clientY) {
       const rect = card.getBoundingClientRect();
       const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
       const y = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
 
-      card.style.setProperty("--x", `${x * 100}%`);
-      card.style.setProperty("--y", `${y * 100}%`);
-      card.style.setProperty("--tilt-x", `${(0.5 - y) * 6}deg`);
-      card.style.setProperty("--tilt-y", `${(x - 0.5) * 8}deg`);
+      card.style.setProperty('--x', `${x * 100}%`);
+      card.style.setProperty('--y', `${y * 100}%`);
+      card.style.setProperty('--tilt-x', `${(0.5 - y) * 6}deg`);
+      card.style.setProperty('--tilt-y', `${(x - 0.5) * 8}deg`);
     }
 
     function resetCard(card) {
-      card.style.setProperty("--x", "50%");
-      card.style.setProperty("--y", "50%");
-      card.style.setProperty("--tilt-x", "0deg");
-      card.style.setProperty("--tilt-y", "0deg");
+      card.style.setProperty('--x', '50%');
+      card.style.setProperty('--y', '50%');
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
     }
 
     cards.forEach((card) => {
-      card.addEventListener("pointermove", (event) => {
+      card.addEventListener('pointermove', (event) => {
         updateCard(card, event.clientX, event.clientY);
       });
 
-      card.addEventListener("pointerdown", (event) => {
+      card.addEventListener('pointerdown', (event) => {
         updateCard(card, event.clientX, event.clientY);
       });
 
-      card.addEventListener("pointerleave", () => resetCard(card));
-      card.addEventListener("pointercancel", () => resetCard(card));
+      card.addEventListener('pointerleave', () => resetCard(card));
+      card.addEventListener('pointercancel', () => resetCard(card));
 
-      card.addEventListener("pointerup", (event) => {
-        if (event.pointerType === "touch") {
+      card.addEventListener('pointerup', (event) => {
+        if (event.pointerType === 'touch') {
           setTimeout(() => resetCard(card), 250);
         }
       });
-
-      card.addEventListener("touchmove", (event) => {
-        if (!event.touches[0]) return;
-        updateCard(card, event.touches[0].clientX, event.touches[0].clientY);
-      }, { passive: true });
     });
   </script>
 </body>
