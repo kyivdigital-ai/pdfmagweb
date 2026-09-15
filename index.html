@@ -66,7 +66,6 @@
       will-change: transform;
     }
 
-    /* Keep the product card physically stable on touch devices so a tap is never interpreted as a drag. */
     .product-shell {
       animation: none;
       transform: none;
@@ -274,7 +273,7 @@
           target="_top"
           aria-label="TRACEY AFRICA"
         >
-          <img src="traceyafrica1.jpg" alt="TRACEY AFRICA" draggable="false" />
+          <img src="tracey%20post.jpg" alt="TRACEY AFRICA" draggable="false" />
         </a>
       </div>
 
@@ -292,8 +291,6 @@
   </main>
 
   <script>
-    /* Only holographic placeholder cards get pointer/tilt handlers.
-       The Tracey Africa product card stays a plain native link so taps remain reliable on iOS/Android. */
     const holoCards = document.querySelectorAll('.holo-card');
 
     function updateCard(card, clientX, clientY) {
