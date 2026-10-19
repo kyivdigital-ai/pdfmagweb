@@ -216,6 +216,38 @@
       -webkit-user-drag: none;
     }
 
+
+    .sold-out-card {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .sold-out-ribbon {
+      position: absolute;
+      z-index: 30;
+      left: -12%;
+      top: 46%;
+      width: 124%;
+      padding: 10px 0;
+      transform: translateY(-50%) rotate(-12deg);
+      background: #ff1a00;
+      color: #000;
+      font-family: "Afacad", Arial, sans-serif;
+      font-size: clamp(18px, 2.1vw, 31px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: .035em;
+      text-align: center;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .sold-out-ribbon {
+        font-size: clamp(20px, 6vw, 32px);
+      }
+    }
+
     @keyframes floatCard {
       0%   { transform: translateY(3px) rotateZ(-.25deg); }
       50%  { transform: translateY(-6px) rotateZ(.25deg); }
@@ -267,36 +299,24 @@
   <main class="page">
     <section class="cards" aria-label="Holographic cards">
       <div class="card-shell product-shell">
-        <a
-          class="card product-card"
-          href="https://pdf-mag.com/traceyafrica/"
-          target="_top"
-          aria-label="TRACEY AFRICA"
-        >
+        <div class="card product-card sold-out-card" role="img" aria-label="TRACEY AFRICA — SOLD OUT">
           <img src="tracey%20post.jpg" alt="TRACEY AFRICA" draggable="false" />
-        </a>
+          <span class="sold-out-ribbon" aria-hidden="true">SOLD OUT</span>
+        </div>
       </div>
 
       <div class="card-shell product-shell">
-        <a
-          class="card product-card"
-          href="https://pdf-mag.com/isabellalovestory/"
-          target="_top"
-          aria-label="ISABELLA LOVESTORY"
-        >
+        <div class="card product-card sold-out-card" role="img" aria-label="ISABELLA LOVESTORY — SOLD OUT">
           <img src="isavellalovestory.jpg" alt="ISABELLA LOVESTORY" draggable="false" />
-        </a>
+          <span class="sold-out-ribbon" aria-hidden="true">SOLD OUT</span>
+        </div>
       </div>
 
       <div class="card-shell product-shell">
-        <a
-          class="card product-card"
-          href="https://pdf-mag.com/babymorocco/"
-          target="_top"
-          aria-label="BABY MOROCCO"
-        >
+        <div class="card product-card sold-out-card" role="img" aria-label="BABY MOROCCO — SOLD OUT">
           <img src="babymorocco.jpg" alt="BABY MOROCCO" draggable="false" />
-        </a>
+          <span class="sold-out-ribbon" aria-hidden="true">SOLD OUT</span>
+        </div>
       </div>
       <div class="card-shell product-shell">
         <a
@@ -319,24 +339,16 @@
         </a>
       </div>
       <div class="card-shell product-shell">
-        <a
-          class="card product-card"
-          href="https://pdf-mag.com/falsewitness/"
-          target="_top"
-          aria-label="FALSE WITNESS"
-        >
+        <div class="card product-card sold-out-card" role="img" aria-label="FALSE WITNESS — SOLD OUT">
           <img src="falsewitness.jpg" alt="FALSE WITNESS" draggable="false" />
-        </a>
+          <span class="sold-out-ribbon" aria-hidden="true">SOLD OUT</span>
+        </div>
       </div>
       <div class="card-shell product-shell">
-        <a
-          class="card product-card"
-          href="https://pdf-mag.com/guitamay/"
-          target="_top"
-          aria-label="GUI & TAMAY"
-        >
+        <div class="card product-card sold-out-card" role="img" aria-label="GUI & TAMAY — SOLD OUT">
           <img src="sports-2.jpg" alt="GUI & TAMAY" draggable="false" />
-        </a>
+          <span class="sold-out-ribbon" aria-hidden="true">SOLD OUT</span>
+        </div>
       </div>
       <div class="card-shell product-shell">
         <a
